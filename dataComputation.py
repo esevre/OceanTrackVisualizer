@@ -77,9 +77,33 @@ def dAge_dPoint(age1 : float, age2 : float, point1 : point, point2 : point) -> f
     return value
 
 
+def generate_spreading_rates(ages : List[float], points : List[point]) -> List[float]:
+    size = len(ages) - 1
+    spreading_rates = []
+    for i in range(size):
+        dAge_dPosition = dAge_dPoint(ages[i], ages[i+1], points[i], points[i+1])
+        spreading_rates.append(dAge_dPosition)
+    return spreading_rates
 
 
+def generate_points_from_arrays(x : List[float], y : List[float]) -> List[point] :
+    point_array = []
+    for i in range(len(x)):
+        point_array.append(point(x[i], y[i]))
+    return point_array
 
 
+def generate_xy_from_points(points : List[point]):
+    x = []
+    y = []
+    for i in range(len(points)):
+        x.append(points[i].x)
+        y.append(points[i].y)
+    return x, y
 
 
+def map_xy_to_line(x : List[float],
+                   y : List[float]):
+    pts = generate_points_from_arrays(x, y)
+    pts = project_points_on_line(pts, pts[0], pts[-1])
+    return generate_xy_from_points(pts)
