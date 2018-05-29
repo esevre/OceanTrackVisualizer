@@ -72,6 +72,10 @@ def distance_between_p1p2(x1, y1, x2, y2) -> float:
     return np.sqrt((x2-x1)**2 + (y2-y1)**2)
 
 
+def dAge_dPoint(age1 : float, age2 : float, point1 : point, point2 : point) -> float:
+    value = (age2-age1) / (distance_between_p1p2(point1.x, point1.y, point2.x, point2.y))
+    return value
+
 
 
 
