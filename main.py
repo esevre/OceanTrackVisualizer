@@ -12,6 +12,9 @@ import processFile as pf
 import dataComputation as dc
 
 
+#
+#  Get data from a file, load into header and data objects
+#
 header, data = pf.get_data_from_tab_separated_file('file.csv')
 
 x = np.array([x for x, y, age in data])
@@ -21,6 +24,25 @@ age = np.array([age for x, y, age in data])
 
 x_old = np.array([x for x, y, age in data])
 y_old = np.array([y for x, y, age in data])
+
+pts = []
+pts_old = []
+for i in range(len(x)):
+    pts.append(dc.point(x[i], y[i]))
+    pts_old.append(dc.point(x_old[i], y_old[i]))
+
+spreading_rates = dc.generate_spreading_rates(age, pts)
+spreading_rates.append( spreading_rates[-1])
+
+spreading_rates_old = dc.generate_spreading_rates(age, pts_old)
+
+
+plt.plot(spreading_rates)
+plt.show()
+
+plt.plot(spreading_rates_old)
+plt.show()
+
 
 
 #
@@ -65,6 +87,11 @@ m.drawmeridians(np.arange(xmin, xmax, 1.0))
 #
 x, y = m(x, y)
 x_old, y_old = m(x_old, y_old)
+
+
+
+
+
 
 # cs = m.contour(x, y, age)
 for i in range(len(x)):
