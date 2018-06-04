@@ -2,17 +2,9 @@
 #  Main program for visualization of spreading rates
 #
 #
-#  mpl_toolkits.basemap provides mapping tools for projecting points on a map
+#  Simple examples of what can be done with the code I am creating
 #
-from mpl_toolkits.basemap import Basemap
-import numpy as np
-import matplotlib.pyplot as plt
-
-import processFile as pf
-import dataComputation as dc
 import mapDisplay as md
-
-from matplotlib.collections import LineCollection
 
 
 #
@@ -20,61 +12,6 @@ from matplotlib.collections import LineCollection
 #
 file1 = 'file.csv'
 md.plot_track_line_with_correction_from_tab_file(file1)
-
-
-
-#
-#  Get data from a file, load into header and data objects
-#
-# header, data = pf.get_data_from_tab_separated_file('file.csv')
-#
-# x = np.array([x for x, y, age in data])
-# y = np.array([y for x, y, age in data])
-#
-# age = np.array([age for x, y, age in data])
-#
-# x_old = np.array([x for x, y, age in data])
-# y_old = np.array([y for x, y, age in data])
-#
-# pts = []
-# pts_old = []
-# for i in range(len(x)):
-#     pts.append(dc.point(x[i], y[i]))
-#     pts_old.append(dc.point(x_old[i], y_old[i]))
-#
-# spreading_rates = dc.generate_spreading_rates(age, pts)
-# spreading_rates.append( spreading_rates[-1])
-#
-# spreading_rates_old = dc.generate_spreading_rates(age, pts_old)
-#
-
-# file1 = 'file.csv'
-# x, y, ages, spreading_rates = md.generate_plotable_data(file1)
-#
-# plt.plot(spreading_rates)
-# plt.show()
-#
-# md.plot_track_line_with_correction_from_tab_file(file1)
-
-# plt.plot(spreading_rates_old)
-# plt.show()
-
-
-#
-#  Map x,y coordinates to a straight line
-#
-# This correction happens when x,y are created
-# x, y = dc.map_xy_to_line(x, y)
-
-
-# xavg, yavg = np.average(x), np.average(y)
-# print('plot centered at: ', xavg, yavg)
-#
-# xmin =  62.
-# xmax =  68.
-# ymin = -15.
-# ymax = -12.
-
 
 
 # llcrnrlat,llcrnrlon,urcrnrlat,urcrnrlon
