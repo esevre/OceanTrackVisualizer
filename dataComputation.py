@@ -109,4 +109,10 @@ def map_xy_to_line(x : List[float],
     return generate_xy_from_points(pts)
 
 
-
+def x_y_from_data(data : List[point]):
+    x = []
+    y = []
+    for pt in data:
+        x.append(pt.x)
+        y.append(pt.y)
+    return x, y
