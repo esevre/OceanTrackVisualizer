@@ -16,6 +16,14 @@ from matplotlib.collections import LineCollection
 
 
 #
+#  Simplest code to plot the actual track line, and the corrected track line
+#
+file1 = 'file.csv'
+md.plot_track_line_with_correction_from_tab_file(file1)
+
+
+
+#
 #  Get data from a file, load into header and data objects
 #
 # header, data = pf.get_data_from_tab_separated_file('file.csv')
@@ -40,11 +48,13 @@ from matplotlib.collections import LineCollection
 # spreading_rates_old = dc.generate_spreading_rates(age, pts_old)
 #
 
-file1 = 'file.csv'
-x, y, ages, spreading_rates = md.generate_plotable_data(file1)
-
-plt.plot(spreading_rates)
-plt.show()
+# file1 = 'file.csv'
+# x, y, ages, spreading_rates = md.generate_plotable_data(file1)
+#
+# plt.plot(spreading_rates)
+# plt.show()
+#
+# md.plot_track_line_with_correction_from_tab_file(file1)
 
 # plt.plot(spreading_rates_old)
 # plt.show()
@@ -57,20 +67,13 @@ plt.show()
 # x, y = dc.map_xy_to_line(x, y)
 
 
-xavg, yavg = np.average(x), np.average(y)
-xmin, xmax = min(x), max(x)
-ymin, ymax = min(y), max(y)
-
-print(xmin, ymin)
-print(xavg, yavg)
-print(xmax, ymax)
-
-xmin =  62.
-xmax =  68.
-ymin = -15.
-ymax = -12.
-
-kilometer = 1000.0
+# xavg, yavg = np.average(x), np.average(y)
+# print('plot centered at: ', xavg, yavg)
+#
+# xmin =  62.
+# xmax =  68.
+# ymin = -15.
+# ymax = -12.
 
 
 
@@ -79,37 +82,33 @@ kilometer = 1000.0
 # of the map.
 # lat_ts is the latitude of true scale.
 # resolution = 'c' means use crude resolution coastlines.
-m = Basemap(projection='merc',llcrnrlat=ymin,urcrnrlat=ymax,\
-            llcrnrlon=xmin,urcrnrlon=xmax,lat_ts=yavg,resolution='h')
-m.etopo(scale=2.0)
-m.drawcoastlines()
-
-# draw parallels and meridians.
-m.drawparallels(np.arange(ymin, ymax, 1.0))
-m.drawmeridians(np.arange(xmin, xmax, 1.0))
+# m = Basemap(projection='merc',llcrnrlat=ymin,urcrnrlat=ymax,\
+#             llcrnrlon=xmin,urcrnrlon=xmax,lat_ts=yavg,resolution='h')
+# m.etopo(scale=2.0)
+# m.drawcoastlines()
+#
+# # draw parallels and meridians.
+# m.drawparallels(np.arange(ymin, ymax, 1.0))
+# m.drawmeridians(np.arange(xmin, xmax, 1.0))
 
 #
 # approximate our data and plot on the map
 #
-x, y = m(x, y)
+# x, y = m(x, y)
 # x_old, y_old = m(x_old, y_old)
 
 
 
-
-
-
-# cs = m.contour(x, y, age)
 # for i in range(len(x)):
     # xs = [x_old[i], x[i]]
     # ys = [y_old[i], y[i]]
     # m.plot(xs, ys, 'r', linewidth=1.5)
 # p = m.plot(x_old, y_old, 'ro')
-p = m.plot(x, y, 'y', linewidth=1.0)
-p = m.plot(x, y, 'yo', linewidth=1.0)
-
-plt.title("Yellow Track: Corrected Data\nRed Dots: Original Data")
-plt.show()
+# p = m.plot(x, y, 'y', linewidth=1.0)
+# p = m.plot(x, y, 'yo', linewidth=1.0)
+#
+# plt.title("Yellow Track: Corrected Data\nRed Dots: Original Data")
+# plt.show()
 
 
 

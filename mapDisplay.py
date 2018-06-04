@@ -30,7 +30,7 @@ def generate_plotable_data(filename : str):
 
     # note: may want to move data to corrected line in a different function ... something to consider
     # Correct data to fit on line
-    x, y = dc.map_xy_to_line(x, y)
+    # x, y = dc.map_xy_to_line(x, y)
 
     ages = np.array([age for x, y, age in data])
     pts = []
@@ -45,8 +45,36 @@ def generate_plotable_data(filename : str):
 #
 #  todo: write plot_track_line_with_correction function
 #
-def plot_track_line_with_correction_from_tab_file(filename : str):
-    pass
+def plot_track_line_with_correction_from_tab_file(filename : str, title : str = 'Corrected Track Line'):
+    x_old, y_old, ages, spreading_rates = generate_plotable_data(filename)
+    x, y = dc.map_xy_to_line(x_old, y_old)
+    xmin = min(x) - 0.5
+    xmax = max(x) + 0.5
+    ymin = min(y) - 0.5
+    ymax = max(y) + 0.5
+    xavg = (xmax-xmin)/2.0
+    yavg = (ymax-ymin)/2.0
+
+    m = Basemap(projection='merc', llcrnrlat=ymin, urcrnrlat=ymax,
+                llcrnrlon=xmin, urcrnrlon=xmax, lat_ts=yavg, resolution='h')
+    m.etopo(scale=2.0)
+    m.drawcoastlines()
+
+    # draw parallels and meridians.
+    m.drawparallels(np.arange(ymin, ymax, 1.0))
+    m.drawmeridians(np.arange(xmin, xmax, 1.0))
+
+    x, y, = m(x,y)
+    x_old, y_old = m(x_old, y_old)
+
+    for i in range(len(x)):
+        xs = [x_old[i], x[i]]
+        ys = [y_old[i], y[i]]
+        m.plot(xs, ys, 'r', linewidth=1.0)
+    p = m.plot(x_old, y_old, 'ro')
+    p = m.plot(x,y,'y', linewidth=1.0)
+    p = m.plot(x,y,'yo', linewidth=1.0)
+    plt.show()
 
 #
 #  todo: write plot_single_track_from_tab_file function
