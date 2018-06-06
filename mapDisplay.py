@@ -101,6 +101,10 @@ class ColorMap:
 
         return ColorPoint(val, r, g, b, a)
 
+    def get_color_tuple(self, val : float):
+        color = self.get_color(val)
+        return (color.r, color.g, color.b, color.a)
+
 
 def get_blue_green_red_colormap(min : float, max : float) -> ColorMap :
     colormap = ColorMap(min, max)
@@ -187,7 +191,13 @@ def plot_single_track_from_tab_file(filename : str, title : str = "Spreading Rat
 
     # todo: change code below to draw line segments with color based on spreading rates
     x, y, = m(x,y)
+    colormap = get_blue_green_red_colormap(spreading_rates.min(), spreading_rates.max())
+    for i in range(len(x)-1):
+        xs = [x[i], x[i + 1]]
+        ys = [y[i], y[i + 1]]
+        m.plot(xs, ys, color=colormap.get_color_tuple(spreading_rates[i]), linewidth=15.0)
 
+    plt.show()
 
 
 

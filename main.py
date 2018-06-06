@@ -10,7 +10,10 @@ import mapDisplay as md
 #
 #  Simplest code to plot the actual track line, and the corrected track line
 #
+
 file1 = 'file.csv'
+
+
 # md.plot_track_line_with_correction_from_tab_file(file1)
 
 # md.plot_single_track_from_tab_file(file1)
@@ -29,4 +32,4 @@ for i in range(61):
 
 
 
-
+md.plot_single_track_from_tab_file(file1)
