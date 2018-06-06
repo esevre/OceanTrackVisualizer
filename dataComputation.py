@@ -106,7 +106,7 @@ def generate_spreading_rates(ages : List[float], points : List[point]) -> List[f
     for i in range(size):
         dAge_dPosition = dAge_dPoint(ages[i], ages[i+1], points[i], points[i+1])
         spreading_rates.append(dAge_dPosition)
-    return spreading_rates
+    return np.array(spreading_rates)
 
 
 def generate_points_from_arrays(x : List[float], y : List[float]) -> List[point] :
