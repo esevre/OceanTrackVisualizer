@@ -21,7 +21,6 @@ import processFile as pf
 import dataComputation as dc
 
 
-
 def plot_track_line_with_correction_from_tab_file(filename : str, title : str = 'Corrected Track Line'):
     """
     Plot the track line and the corrected track line showing

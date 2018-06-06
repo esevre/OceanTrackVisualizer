@@ -27,3 +27,4 @@ def get_data_from_tab_separated_file(filename : str):
         header_lines = lines[0]
         lines = [[float(long), float(lat), float(age)] for long, lat, age in lines[1:]]
     return header_lines, lines
+

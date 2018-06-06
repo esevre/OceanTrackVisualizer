@@ -67,7 +67,6 @@ class track:
         pass
 
 
-
 def project_point_on_line(pt: point, line_a: point, line_b: point):
     ln = line_b - line_a                          # compute direction vector
     ln = point(ln.x / ln.len(), ln.y / ln.len())  # normalize the vector
