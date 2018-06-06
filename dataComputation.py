@@ -8,6 +8,12 @@ import scipy as sci
 import numpy.linalg as lin
 
 #
+#  Erik's custom function headers
+#
+import processFile as pf
+
+
+#
 #  point
 #
 #  Lightweight class to do quick basic 2d vector operations
@@ -43,6 +49,23 @@ class point:
 
     def __rmul__(self, other):
         return point(self.x*other, self.y*other)
+
+
+#
+#  Object to hold track data including:
+#    pts for location of observed data
+#    corrected points for line analyzed data
+#    direction of the line of motion
+#      (initially from data, better estimates to come later)
+#
+#  todo: update track to simplify a lot of the work for data analysis
+class track:
+    def __init__(self, filename : str):
+        self.pts = []
+        self.corrected_pts = []
+        self.direction = []
+        pass
+
 
 
 def project_point_on_line(pt: point, line_a: point, line_b: point):
@@ -116,3 +139,24 @@ def x_y_from_data(data : List[point]):
         x.append(pt.x)
         y.append(pt.y)
     return x, y
+
+def generate_plotable_data(filename : str):
+    """
+    Generate x, y, age, spreading rate data from tabbed file
+
+    :param filename: path to file
+    :return: x, y, ages, spreading_rates
+    """
+    header, data = pf.get_data_from_tab_separated_file(filename)
+    x = np.array([x for x, y, age in data])
+    y = np.array([y for x, y, age in data])
+
+    ages = np.array([age for x, y, age in data])
+
+    pts = []
+    for i in range(len(x)):
+        pts.append(dc.point(x[i], y[i]))
+
+    spreading_rates = dc.generate_spreading_rates(ages, pts)
+    return x, y, ages, spreading_rates
+

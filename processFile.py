@@ -27,27 +27,3 @@ def get_data_from_tab_separated_file(filename : str):
         header_lines = lines[0]
         lines = [[float(long), float(lat), float(age)] for long, lat, age in lines[1:]]
     return header_lines, lines
-
-#
-# header, data = get_data_from_tab_separated_file('file.csv')
-#
-#
-# x = [x for x, y, age in data]
-# y = [y for x, y, age in data]
-# age = [age for x, y, age in data]
-#
-#
-# print(data)
-# print(x)
-# print(y)
-# print(age)
-#
-# min_x, max_x = min(x), max(x)
-# min_y, max_y = min(y), max(y)
-# min_age, max_age = min(age), max(age)
-#
-# print(min_x, max_x)
-# print(min_y, max_y)
-# print(min_age, max_age)
-#
-

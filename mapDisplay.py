@@ -20,22 +20,6 @@ from matplotlib.collections import LineCollection
 import processFile as pf
 import dataComputation as dc
 
-#
-#   Generate x, y, age, spreading_rate data from tabbed file
-#
-def generate_plotable_data(filename : str):
-    header, data = pf.get_data_from_tab_separated_file(filename)
-    x = np.array([x for x, y, age in data])
-    y = np.array([y for x, y, age in data])
-
-    ages = np.array([age for x, y, age in data])
-
-    pts = []
-    for i in range(len(x)):
-        pts.append(dc.point(x[i], y[i]))
-
-    spreading_rates = dc.generate_spreading_rates(ages, pts)
-    return x, y, ages, spreading_rates
 
 
 def plot_track_line_with_correction_from_tab_file(filename : str, title : str = 'Corrected Track Line'):
@@ -47,7 +31,7 @@ def plot_track_line_with_correction_from_tab_file(filename : str, title : str = 
     :param title: display title for the plot
     """
 
-    x_old, y_old, ages, spreading_rates = generate_plotable_data(filename)
+    x_old, y_old, ages, spreading_rates = dc.generate_plotable_data(filename)
     x, y = dc.map_xy_to_line(x_old, y_old)
     xmin = min(x)
     xmax = max(x)
