@@ -200,8 +200,6 @@ def plot_single_track_from_tab_file(filename : str, title : str = "Spreading Rat
     plt.show()
 
 
-
-
 #
 #  todo: write plot_single_track_from_csv_file function
 #
