@@ -13,6 +13,7 @@ import numpy.linalg as lin
 import processFile as pf
 
 
+
 #
 #  point
 #
@@ -139,6 +140,7 @@ def x_y_from_data(data : List[point]):
         y.append(pt.y)
     return x, y
 
+
 def generate_plotable_data(filename : str):
     """
     Generate x, y, age, spreading rate data from tabbed file
@@ -154,8 +156,8 @@ def generate_plotable_data(filename : str):
 
     pts = []
     for i in range(len(x)):
-        pts.append(dc.point(x[i], y[i]))
+        pts.append(point(x[i], y[i]))
 
-    spreading_rates = dc.generate_spreading_rates(ages, pts)
+    spreading_rates = generate_spreading_rates(ages, pts)
     return x, y, ages, spreading_rates
 
