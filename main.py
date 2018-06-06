@@ -16,10 +16,7 @@ file1 = 'file.csv'
 # md.plot_single_track_from_tab_file(file1)
 
 
-colormap = md.ColorMap(0.0, 1.0)
-colormap.set_min(0, 0, 1)
-colormap.set_max(1, 0, 0)
-colormap.set_midpoint(0, 1, 0)
+colormap = md.get_blue_green_red_colormap(-3.14, 3.14)
 
 
 for cp in colormap.color_points:
@@ -27,8 +24,8 @@ for cp in colormap.color_points:
 
 print(colormap.get_color(0.25))
 print("*****************************")
-for i in range(11):
-    print(colormap.get_color(0.1 * i))
+for i in range(61):
+    print(colormap.get_color(-3.14+0.1 * i))
 
 
 

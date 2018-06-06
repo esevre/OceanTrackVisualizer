@@ -102,6 +102,14 @@ class ColorMap:
         return ColorPoint(val, r, g, b, a)
 
 
+def get_blue_green_red_colormap(min : float, max : float) -> ColorMap :
+    colormap = ColorMap(min, max)
+    colormap.set_min(0, 0, 1)
+    colormap.set_midpoint(0, 1, 0)
+    colormap.set_max(1, 0, 1)
+    return colormap
+
+
 def plot_track_line_with_correction_from_tab_file(filename : str, title : str = 'Corrected Track Line'):
     """
     Plot the track line and the corrected track line showing
