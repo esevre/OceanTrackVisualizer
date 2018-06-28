@@ -21,6 +21,7 @@ import processFile as pf
 import dataComputation as dc
 from colormap import ColorMap
 
+
 def get_blue_green_red_colormap(min : float, max : float) -> ColorMap :
     colormap = ColorMap(min, max)
     colormap.set_min(0, 0, 1)
