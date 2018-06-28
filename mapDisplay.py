@@ -19,15 +19,7 @@ from matplotlib.collections import LineCollection
 #
 import processFile as pf
 import dataComputation as dc
-from colormap import ColorMap
-
-
-def get_blue_green_red_colormap(min : float, max : float) -> ColorMap :
-    colormap = ColorMap(min, max)
-    colormap.set_min(0, 0, 1)
-    colormap.set_midpoint(0, 1, 0)
-    colormap.set_max(1, 0, 1)
-    return colormap
+from colormap import ColorMap, get_blue_green_red_colormap
 
 
 def plot_track_line_with_correction_from_tab_file(filename : str, title : str = 'Corrected Track Line'):
