@@ -80,7 +80,6 @@ def project_point_on_line(pt: point, line_a: point, line_b: point):
 
 def project_points_on_line(pt_array: List[point], line_a: point, line_b: point):
     results = pt_array
-    # r = [project_point_on_line(pt, line_a, line_b) for pt in pt_array]
     for i, pt in enumerate(pt_array):
         results[i] = project_point_on_line(pt, line_a, line_b)
     return results
