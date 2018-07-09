@@ -146,7 +146,9 @@ def generate_plotable_data(filename : str):
     :param filename: path to file
     :return: x, y, ages, spreading_rates
     """
-    header, data = pf.get_data_from_tab_separated_file(filename)
+    # header, data = pf.get_data_from_tab_separated_file(filename)
+    header, data = pf.read_specified_data(filename)
+
     x = np.array([x for x, y, age in data])
     y = np.array([y for x, y, age in data])
 
@@ -161,20 +163,20 @@ def generate_plotable_data(filename : str):
 
 
 #
-#  Get min-avg-max from single input file
+#  Get min-mid-max from single input file
 #
-def get_min_avg_max_from_file(filename : str):
+def get_min_mid_max_from_file(filename : str):
     x, y, _, _ = generate_plotable_data(filename)
     xmin = min(x)
     xmax = max(x)
     ymin = min(y)
     ymax = max(y)
-    xavg = xmin+(xmax-xmin)/2.0
-    yavg = ymin+(ymax-ymin)/2.0
-    return xmin, xavg, xmax, ymin, yavg, ymax
+    xmid = xmin+(xmax-xmin)/2.0
+    ymid = ymin+(ymax-ymin)/2.0
+    return xmin, xmid, xmax, ymin, ymid, ymax
 
 
-def get_min_avg_max_from_file_list(files : [str]):
+def get_min_mid_max_from_file_list(files : [str]):
     xmin = None
     xmax = None
     ymin = None
@@ -182,9 +184,9 @@ def get_min_avg_max_from_file_list(files : [str]):
 
     for file in files:
         if xmin is None:
-            xmin, _, xmax, ymin, _, ymax = get_min_avg_max_from_file(file)
+            xmin, _, xmax, ymin, _, ymax = get_min_mid_max_from_file(file)
         else:
-            x0, _, x2, y0, _, y2 = get_min_avg_max_from_file(file)
+            x0, _, x2, y0, _, y2 = get_min_mid_max_from_file(file)
             if x0 < xmin:
                 xmin = x0
             if x2 > xmax:
@@ -194,7 +196,7 @@ def get_min_avg_max_from_file_list(files : [str]):
             if y2 > ymax:
                 ymax = y2
 
-    xavg = xmin+(xmax-xmin)/2.0
-    yavg = ymin+(ymax-ymin)/2.0
-    return xmin, xavg, xmax, ymin, yavg, ymax
+    xmid = xmin+(xmax-xmin)/2.0
+    ymid = ymin+(ymax-ymin)/2.0
+    return xmin, xmid, xmax, ymin, ymid, ymax
 

@@ -37,8 +37,8 @@ def plot_track_line_with_correction_from_tab_file(filename : str, title : str = 
     xmax = max(x)
     ymin = min(y)
     ymax = max(y)
-    xavg = (xmax-xmin)/2.0
-    yavg = (ymax-ymin)/2.0
+    xmid = (xmax-xmin)/2.0
+    ymid = (ymax-ymin)/2.0
     x_buffer = (xmax-xmin) / 10.0
     y_buffer = (ymax-ymin) / 10.0
     xmin -= x_buffer
@@ -48,7 +48,7 @@ def plot_track_line_with_correction_from_tab_file(filename : str, title : str = 
 
     # Generate a basemap for the desired region
     m = Basemap(projection='merc', llcrnrlat=ymin, urcrnrlat=ymax,
-                llcrnrlon=xmin, urcrnrlon=xmax, lat_ts=yavg, resolution='h')
+                llcrnrlon=xmin, urcrnrlon=xmax, lat_ts=ymid, resolution='h')
     m.etopo(scale=2.0)
     m.drawcoastlines()
 
@@ -71,7 +71,7 @@ def plot_track_line_with_correction_from_tab_file(filename : str, title : str = 
 
 
 def plot_single_track_from_tab_file(filename : str, title : str = "Spreading Rate:"):
-    xmin, xavg, xmax, ymin, yavg, ymax = dc.get_min_avg_max_from_file(filename)
+    xmin, xmid, xmax, ymin, ymid, ymax = dc.get_min_mid_max_from_file(filename)
 
     x_buffer = (xmax-xmin) / 5.0
     y_buffer = (ymax-ymin) / 5.0
@@ -81,7 +81,7 @@ def plot_single_track_from_tab_file(filename : str, title : str = "Spreading Rat
     ymax += y_buffer
     # Generate a basemap for the desired region
     m = Basemap(projection='merc', llcrnrlat=ymin, urcrnrlat=ymax,
-                llcrnrlon=xmin, urcrnrlon=xmax, lat_ts=yavg, resolution='h')
+                llcrnrlon=xmin, urcrnrlon=xmax, lat_ts=ymid, resolution='h')
     m.etopo(scale=2.0)
     m.drawcoastlines()
 
@@ -98,7 +98,7 @@ def plot_single_track_from_tab_file(filename : str, title : str = "Spreading Rat
 #  I want a function to plot a single track on the map,
 #    but the map is defined in the parent scope
 #
-def add_single_track_to_map(trackfile : str, m : Basemap):
+def add_single_track_to_map(trackfile : str, m : Basemap, width=15.0):
     x_old, y_old, ages, spreading_rates = dc.generate_plotable_data(trackfile)
     x, y = dc.map_xy_to_line(x_old, y_old)
 
@@ -108,18 +108,38 @@ def add_single_track_to_map(trackfile : str, m : Basemap):
     for i in range(len(x)-1):
         xs = [x[i], x[i + 1]]
         ys = [y[i], y[i + 1]]
-        m.plot(xs, ys, color=colormap.get_color_tuple(spreading_rates[i]), linewidth=15.0)
+        m.plot(xs, ys, color=colormap.get_color_tuple(spreading_rates[i]), linewidth=width)
 
 
 #
 #  todo: write plot_tracks_from_tab_files function
 #
-def plot_tracks_from_tab_files(trackfiles : [str]):
-    xmin, xavg, xmax, ymin, yavg, ymax = dc.get_min_avg_max_from_file_list(trackfiles)
+def plot_tracks_from_tab_files(trackfiles : [str], verbose = False):
+    xmin, xmid, xmax, ymin, ymid, ymax = dc.get_min_mid_max_from_file_list(trackfiles)
 
-    print("x:  min: %s, max: %s, mid: %s" %(xmin, xmax, xavg))
-    print("y:  min: %s, max: %s, mid: %s" %(ymin, ymax, yavg))
+    x_buffer = (xmax-xmin) / 5.0
+    y_buffer = (ymax-ymin) / 5.0
+    xmin -= x_buffer
+    xmax += x_buffer
+    ymin -= y_buffer
+    ymax += y_buffer
 
+    # Generate a basemap for the desired region
+    m = Basemap(projection='merc', llcrnrlat=ymin, urcrnrlat=ymax,
+                llcrnrlon=xmin, urcrnrlon=xmax, lat_ts=ymid, resolution='h')
+    m.etopo(scale=2.0)
+    m.drawcoastlines()
+
+    # draw parallels and meridians.
+    m.drawparallels(np.arange(ymin, ymax, 1.0))
+    m.drawmeridians(np.arange(xmin, xmax, 1.0))
+
+    for file in trackfiles:
+        if verbose:
+            print('plotting track: %s' %file)
+        add_single_track_to_map(file, m, width=10.0)
+
+    plt.show()
 
 #
 #  todo: write plot_tracks_from_csv_files function
