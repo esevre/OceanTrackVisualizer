@@ -159,3 +159,16 @@ def generate_plotable_data(filename : str):
     spreading_rates = generate_spreading_rates(ages, pts)
     return x, y, ages, spreading_rates
 
+
+#
+#  Get min-avg-max from single input file
+#
+def get_min_avg_max_from_file(filename : str):
+    x, y, _, _ = generate_plotable_data(filename)
+    xmin = min(x)
+    xmax = max(x)
+    ymin = min(y)
+    ymax = max(y)
+    xavg = (xmax-xmin)/2.0
+    yavg = (ymax-ymin)/2.0
+    return xmin, xavg, xmax, ymin, yavg, ymax
