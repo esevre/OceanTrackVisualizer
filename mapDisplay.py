@@ -98,6 +98,19 @@ def plot_single_track_from_tab_file(filename : str, title : str = "Spreading Rat
     m.drawparallels(np.arange(ymin, ymax, 1.0))
     m.drawmeridians(np.arange(xmin, xmax, 1.0))
 
+    add_single_track_to_map(filename, m)
+
+    plt.show()
+
+
+#
+#  I want a function to plot a single track on the map,
+#    but the map is defined in the parent scope
+#
+def add_single_track_to_map(trackfile : str, m : Basemap):
+    x_old, y_old, ages, spreading_rates = dc.generate_plotable_data(trackfile)
+    x, y = dc.map_xy_to_line(x_old, y_old)
+
     # todo: change code below to draw line segments with color based on spreading rates
     x, y, = m(x,y)
     colormap = get_blue_green_red_colormap(spreading_rates.min(), spreading_rates.max())
@@ -105,8 +118,6 @@ def plot_single_track_from_tab_file(filename : str, title : str = "Spreading Rat
         xs = [x[i], x[i + 1]]
         ys = [y[i], y[i + 1]]
         m.plot(xs, ys, color=colormap.get_color_tuple(spreading_rates[i]), linewidth=15.0)
-
-    plt.show()
 
 
 #
