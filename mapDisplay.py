@@ -117,8 +117,11 @@ def add_single_track_to_map(trackfile : str, m : Basemap):
 #
 #  todo: write plot_tracks_from_tab_files function
 #
-def plot_tracks_from_tab_files(filename : str):
-    pass
+def plot_tracks_from_tab_files(trackfiles : [str]):
+    xmin, xavg, xmax, ymin, yavg, ymax = dc.get_min_avg_max_from_file_list(trackfiles)
+
+    print("x:  min: %s, max: %s, mid: %s" %(xmin, xmax, xavg))
+    print("y:  min: %s, max: %s, mid: %s" %(ymin, ymax, yavg))
 
 
 #

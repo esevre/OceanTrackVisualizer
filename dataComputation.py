@@ -182,7 +182,7 @@ def get_min_avg_max_from_file_list(files : [str]):
 
     for file in files:
         if xmin is None:
-            xmin, _, xmax, ymin, _, ymax = get_min_avg_max_from_file()
+            xmin, _, xmax, ymin, _, ymax = get_min_avg_max_from_file(file)
         else:
             x0, _, x2, y0, _, y2 = get_min_avg_max_from_file(file)
             if x0 < xmin:

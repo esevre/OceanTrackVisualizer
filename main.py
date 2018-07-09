@@ -14,3 +14,5 @@ import mapDisplay as md
 file1 = 'file.csv'
 
 md.plot_single_track_from_tab_file(file1)
+
+md.plot_tracks_from_tab_files([file1])
