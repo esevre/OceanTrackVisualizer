@@ -79,8 +79,8 @@ def plot_single_track_from_tab_file(filename : str, title : str = "Spreading Rat
 
     xmin, xavg, xmax, ymin, yavg, ymax = dc.get_min_avg_max_from_file(filename)
 
-    x_buffer = (xmax-xmin) / 10.0
-    y_buffer = (ymax-ymin) / 10.0
+    x_buffer = (xmax-xmin) / 5.0
+    y_buffer = (ymax-ymin) / 5.0
     xmin -= x_buffer
     xmax += x_buffer
     ymin -= y_buffer
