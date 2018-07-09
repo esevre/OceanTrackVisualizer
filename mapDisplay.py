@@ -76,13 +76,9 @@ def plot_track_line_with_correction_from_tab_file(filename : str, title : str = 
 def plot_single_track_from_tab_file(filename : str, title : str = "Spreading Rate:"):
     x_old, y_old, ages, spreading_rates = dc.generate_plotable_data(filename)
     x, y = dc.map_xy_to_line(x_old, y_old)
-    # xmin = min(x)
-    # xmax = max(x)
-    # ymin = min(y)
-    # ymax = max(y)
-    # xavg = (xmax-xmin)/2.0
-    # yavg = (ymax-ymin)/2.0
+
     xmin, xavg, xmax, ymin, yavg, ymax = dc.get_min_avg_max_from_file(filename)
+
     x_buffer = (xmax-xmin) / 10.0
     y_buffer = (ymax-ymin) / 10.0
     xmin -= x_buffer
