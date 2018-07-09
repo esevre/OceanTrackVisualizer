@@ -172,3 +172,29 @@ def get_min_avg_max_from_file(filename : str):
     xavg = (xmax-xmin)/2.0
     yavg = (ymax-ymin)/2.0
     return xmin, xavg, xmax, ymin, yavg, ymax
+
+
+def get_min_avg_max_from_file_list(files : [str]):
+    xmin = None
+    xmax = None
+    ymin = None
+    ymax = None
+
+    for file in files:
+        if xmin is None:
+            xmin, _, xmax, ymin, _, ymax = get_min_avg_max_from_file()
+        else:
+            x0, _, x2, y0, _, y2 = get_min_avg_max_from_file(file)
+            if x0 < xmin:
+                xmin = x0
+            if x2 > xmax:
+                xmax = x2
+            if y0 < ymin:
+                ymin = y0
+            if y2 > ymax:
+                ymax = y2
+
+    xavg = (xmax-xmin)/2.0
+    yavg = (ymax-ymin)/2.0
+    return xmin, xavg, xmax, ymin, yavg, ymax
+

@@ -70,9 +70,6 @@ def plot_track_line_with_correction_from_tab_file(filename : str, title : str = 
     plt.show()
 
 
-#
-#  todo: update plot_track so it can be called multiple times to plot multiple tracks on the same region
-#
 def plot_single_track_from_tab_file(filename : str, title : str = "Spreading Rate:"):
     x_old, y_old, ages, spreading_rates = dc.generate_plotable_data(filename)
     x, y = dc.map_xy_to_line(x_old, y_old)
