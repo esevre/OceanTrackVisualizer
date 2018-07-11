@@ -22,7 +22,7 @@ def test_01():
     md.plot_tracks_from_tab_files([file1])
 
 
-test_01()
+# test_01()
 print('*****   Test 01 complete   ********')
 
 def test_02():

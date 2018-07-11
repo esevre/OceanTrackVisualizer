@@ -102,7 +102,6 @@ def add_single_track_to_map(trackfile : str, m : Basemap, width=15.0):
     x_old, y_old, ages, spreading_rates = dc.generate_plotable_data(trackfile)
     x, y = dc.map_xy_to_line(x_old, y_old)
 
-    # todo: change code below to draw line segments with color based on spreading rates
     x, y, = m(x,y)
     colormap = get_blue_green_red_colormap(spreading_rates.min(), spreading_rates.max())
     for i in range(len(x)-1):
@@ -112,7 +111,7 @@ def add_single_track_to_map(trackfile : str, m : Basemap, width=15.0):
 
 
 #
-#  todo: write plot_tracks_from_tab_files function
+#  Plot_tracks_from_tab_files function
 #
 def plot_tracks_from_tab_files(trackfiles : [str], verbose = False):
     xmin, xmid, xmax, ymin, ymid, ymax = dc.get_min_mid_max_from_file_list(trackfiles)
@@ -143,7 +142,7 @@ def plot_tracks_from_tab_files(trackfiles : [str], verbose = False):
 
 #
 #  todo: write plot_tracks_from_csv_files function
-#
+#        can do this by mostly using code form above function
 def plot_tracks_from_csv_files(filename : str):
     pass
 

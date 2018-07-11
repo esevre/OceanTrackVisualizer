@@ -58,7 +58,6 @@ class point:
 #    direction of the line of motion
 #      (initially from data, better estimates to come later)
 #
-#  todo: update track to simplify a lot of the work for data analysis
 class track:
     def __init__(self, filename : str):
         self.pts = []
