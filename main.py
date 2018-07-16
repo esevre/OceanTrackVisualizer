@@ -25,6 +25,7 @@ def test_01():
 # test_01()
 print('*****   Test 01 complete   ********')
 
+
 def test_02():
     directory = 'segment4_tracks'
     file1 = os.path.join(directory, 'TrackA_tab.txt')
@@ -41,5 +42,6 @@ def test_02():
     track_files = [file1, file2, file3, file4, file5, file6, file7, file8, file9]
 
     md.plot_tracks_from_tab_files(track_files)
+
 
 test_02()

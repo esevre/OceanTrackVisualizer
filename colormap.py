@@ -39,12 +39,12 @@ class ColorMap:
 
     def add_color_point(self, val : float, r : float, g : float, b : float, a : float = 1):
         # Check for a new min
-        if (val < self.min):
+        if val < self.min:
             self.min = val
             self.color_points.insert(0, ColorPoint(val, r, g, b, a))
             return
         # Check for a new max
-        if (val > self.max):
+        if val > self.max:
             self.max = val
             self.color_points.append(ColorPoint(val, r, g, b, a))
             return
@@ -55,7 +55,7 @@ class ColorMap:
                 self.color_points[index] = ColorPoint(val, r, g, b, a)
                 return
             # Check if the data should be inserted before the current index:
-            if (val < cp.val):
+            if val < cp.val:
                 self.color_points.insert(index, ColorPoint(val, r, g, b, a))
                 return
         # It should not reach this point !
@@ -67,13 +67,13 @@ class ColorMap:
             return self.minColorPoint
         if val >= self.max:
             return self.maxColorPoint
-        id = 0
+        my_id = 0
         for index, cp in enumerate(self.color_points):
             if val < cp.val:
-                id = index
+                my_id = index
                 break
-        p1 = self.color_points[id - 1]
-        p2 = self.color_points[id]
+        p1 = self.color_points[my_id - 1]
+        p2 = self.color_points[my_id]
         w1 = (p2.val - val) / (p2.val - p1.val)
         w2 = 1.0 - w1
 

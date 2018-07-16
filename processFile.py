@@ -16,7 +16,7 @@ def remove_trailing_tabs(line: str):
 
 def parse_lines(line_reader):
     for line in line_reader:
-        if (len(line) == 4):
+        if len(line) == 4:
             yield line
 
 
